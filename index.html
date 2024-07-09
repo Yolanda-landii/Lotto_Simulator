@@ -1,16 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lotto Simulator</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lottery Application</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Lotto Simulator</h1>
+    <div class="container">
+        <h2>Lottery Application</h2>
 
+        <!-- User/Admin Selection -->
+        <div id="userAdminSelection">
+            <button id="userModeBtn" class="btn">User Mode</button>
+            <button id="adminModeBtn" class="btn">Admin Mode</button>
+        </div>
 
-  <script src="lotto.js"></script>
+        <!-- User Mode -->
+        <div id="userMode" style="display: none;">
+            <h3>User Mode - Select Your Numbers</h3>
+
+            <div class="input-group">
+                <label for="boardsSelect">Number of Boards:</label>
+                <input type="number" id="boardsSelect" min="1" max="10" value="1">
+            </div>
+
+            <div class="number-selection">
+                <button class="red">1</button>
+                <button class="red">2</button>
+                <button class="red">3</button>
+                <button class="red">4</button>
+                <button class="red">5</button>
+                <button class="red">6</button>
+                <button class="red">7</button>
+                <button class="red">8</button>
+                <button class="red">9</button>
+                <button class="red">10</button>
+                <button class="red">11</button>
+                <button class="red">12</button>
+                <button class="red">13</button>
+                <button class="yellow">14</button>
+                <button class="yellow">15</button>
+                <button class="yellow">16</button>
+                <button class="yellow">17</button>
+                <button class="yellow">18</button>
+                <button class="yellow">19</button>
+                <button class="yellow">20</button>
+                <button class="yellow">21</button>
+                <button class="yellow">22</button>
+                <button class="yellow">23</button>
+                <button class="yellow">24</button>
+                <button class="yellow">25</button>
+                <button class="green">26</button>
+                <button class="green">27</button>
+                <button class="green">28</button>
+                <button class="green">29</button>
+                <button class="green">30</button>
+                <button class="green">31</button>
+                <button class="green">32</button>
+                <button class="green">33</button>
+                <button class="green">34</button>
+                <button class="green">35</button>
+                <button class="green">36</button>
+                <button class="green">37</button>
+                <button class="blue">38</button>
+                <button class="blue">39</button>
+                <button class="blue">40</button>
+                <button class="blue">41</button>
+                <button class="blue">42</button>
+                <button class="blue">43</button>
+                <button class="blue">44</button>
+                <button class="blue">45</button>
+                <button class="blue">46</button>
+                <button class="blue">47</button>
+                <button class="blue">48</button>
+                <button class="blue">49</button>
+                <button class="blue">50</button>
+                <button class="blue">51</button>
+                <button class="blue">52</button>
+            </div>
+
+            <div class="input-group">
+                <label for="lottoPlus1">Lotto Plus 1 Number:</label>
+                <input type="text" id="lottoPlus1" placeholder="Optional">
+            </div>
+
+            <div class="input-group">
+                <label for="lottoPlus2">Lotto Plus 2 Number:</label>
+                <input type="text" id="lottoPlus2" placeholder="Optional">
+            </div>
+            <button id="generateTickets" class="btn">Generate Tickets</button>
+
+            <div id="ticketInfo" class="result"></div>
+        </div>
+
+        <!-- Admin Mode -->
+        <div id="adminMode" style="display: none;">
+            <h3>Admin Mode - Draw Simulation</h3>
+
+            <button id="simulateDraw" class="btn">Simulate Draw</button>
+
+            <div id="simulationResults" class="result"></div>
+        </div>
+    </div> 
+    <script src="lotto.js"></script>
 </body>
 </html>
