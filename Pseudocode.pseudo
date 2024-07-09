@@ -1,0 +1,130 @@
+Define lottoNumbers = [1, 2, 3, ..., 52]
+Define ballColors = ["red", "yellow", "green", "blue"]
+
+Define ticketData as Object:
+  ticketNumber
+  boards
+  numbers
+  price
+End
+
+Define drawData as Object:
+  winningNumbers
+  date
+End
+
+HTML:
+  Create elements for user input:
+    Number selection
+    Board selection
+  End
+
+  Create elements for displaying ticket information:
+    Ticket number
+    Boards
+    Price
+  End
+
+  Create elements for displaying draw results:
+    Winning numbers
+    Date
+  End
+End
+
+Function selectNumbers():
+  Get user input for selected numbers
+  Validate selected numbers
+  Add selected numbers to ticket data
+End
+
+Function calculatePrice(boards, includeLottoPlus1, includeLottoPlus2):
+  baseCost = boards * ticketPrices.Lotto
+  If includeLottoPlus1:
+    baseCost += boards * ticketPrices.LottoPlus1
+  End
+  If includeLottoPlus2:
+    baseCost += boards * ticketPrices.LottoPlus2
+  End
+  Return baseCost
+End
+
+Function simulateDraw():
+  drawnNumbers = generateRandomNumbers(6, 1, 52)
+  Set drawData.winningNumbers = drawnNumbers
+  Set drawData.date = currentDate()
+  Display drawn numbers and date
+  determineWinners()
+End
+
+Function generateRandomNumbers(count, min, max):
+  numbers = []
+  While numbers.length < count:
+    randomNumber = getRandomNumber(min, max)
+    If randomNumber not in numbers:
+      Add randomNumber to numbers
+    End
+  End
+  Return numbers
+End
+
+Function determineWinners():
+  winningTickets = []
+  For each ticket in savedTickets:
+    If ticket has matching numbers >= 3:
+      Add ticket to winningTickets
+    End
+  End
+  Save winning tickets
+  displayNotification(winningTickets)
+  alertAdmin(winningTickets)
+End
+
+Function saveTicket(ticket):
+  Get savedTickets from localStorage
+  Add ticket to savedTickets
+  Save savedTickets to localStorage
+End
+
+Function getTicket(ticketNumber):
+  Get savedTickets from localStorage
+  For each ticket in savedTickets:
+    If ticket.ticketNumber == ticketNumber:
+      Return ticket
+    End
+  End
+  Return null
+End
+
+Function displayNotification(winningTickets):
+  For each ticket in winningTickets:
+    Display notification for ticket
+  End
+End
+
+Function alertAdmin(winningTickets):
+  If winningTickets.length > 0:
+    Display alert to admin with number of winning tickets
+  End
+End
+
+Function initApp():
+  Load saved data from localStorage
+  Display saved data in the interface
+  Set up event listeners for user input
+End
+
+Function handleUserInput():
+  Get user input for number selection
+  Validate and save user input
+  Update ticket information display
+End
+
+Function simulateDrawAndDisplay():
+  simulateDraw()
+  Update display with draw results and winning tickets
+End
+
+Function testAndDebug():
+  Test the code to ensure it works as expected
+  Debug any issues that arise
+End
