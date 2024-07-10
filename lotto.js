@@ -99,7 +99,21 @@ function selectNumbers() {
   ticketData.price = calculatePrice(Number(boards), true, true); // Example: always include LottoPlus1 and LottoPlus2
   displayTicketInfo();
 }
+function calculatePrice(boards, includeLottoPlus1, includeLottoPlus2) {
+  let baseCost = boards * ticketPrices.Lotto;
+  if (includeLottoPlus1) baseCost += boards * ticketPrices.LottoPlus1;
+  if (includeLottoPlus2) baseCost += boards * ticketPrices.LottoPlus2;
+  return baseCost;
+}
 
+function displayTicketInfo() {
+  ticketInfo.innerHTML = `
+    <p>Ticket Number: ${ticketData.ticketNumber || 'N/A'}</p>
+    <p>Boards: ${ticketData.boards.length}</p>
+    <p>Numbers: ${ticketData.numbers.join(', ')}</p>
+    <p>Price: R${ticketData.price.toFixed(2)}</p>
+  `;
+}
 
 // Step 5: Implement Draw Simulation and Winning Logic
 function simulateDraw() {
@@ -118,6 +132,28 @@ function generateRandomNumbers(count, min, max) {
   return numbers;
 }
 
+
+function displayDrawResults() {
+  drawResults.innerHTML = `
+    <p>Winning Numbers: ${drawData.winningNumbers.join(', ')}</p>
+    <p>Date: ${drawData.date}</p>
+  `;
+}
+
+function determineWinners() {
+  const savedTickets = getSavedTickets();
+  const winningTickets = [];
+  savedTickets.forEach(ticket => {
+    const matchingNumbers = ticket.boards.filter(board => 
+      board.filter(number => drawData.winningNumbers.includes(number)).length >= 3
+    );
+    if (matchingNumbers.length > 0) winningTickets.push(ticket);
+  });
+  saveWinningTickets(winningTickets);
+  displayNotification(winningTickets);
+  alertAdmin(winningTickets);
+}
+
 // Step 8: Implement the Main Logic
 function initApp() {
   renderNumberSelection();
@@ -128,3 +164,5 @@ function initApp() {
 
 // Initialize the app
 initApp();
+
+// 
