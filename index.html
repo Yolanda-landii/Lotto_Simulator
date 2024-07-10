@@ -12,17 +12,26 @@
   </header>
   <main>
     <div>
-      <label for="modeSwitch">Admin Mode</label>
-      <input type="checkbox" id="modeSwitch">
+      <button id="userBtn">User</button>
+      <button id="adminBtn">Admin</button>
     </div>
-    <section id="userSection">
+    <section id="loginSection">
+      <h2>Login</h2>
+      <label for="username">Username:</label>
+      <input type="text" id="username">
+      <label for="password">Password:</label>
+      <input type="password" id="password">
+      <button id="loginBtn">Login</button>
+    </section>
+    <section id="userSection" style="display:none;">
       <h2>User Section</h2>
       <div id="numberSelection"></div>
       <div id="ticketInfo"></div>
       <div id="selectedNumbers"></div>
       <button id="generateBoardsBtn">Generate Boards</button>
+    <div id="boardsContainer"></div> 
     </section>
-    <section id="adminSection">
+    <section id="adminSection" style="display:none;">
       <h2>Admin Section</h2>
       <button id="simulateDrawBtn">Simulate Draw</button>
       <div id="drawResults"></div>

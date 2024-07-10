@@ -109,3 +109,27 @@ body {
     border-radius: 5px;
   }
   
+  .board {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .numbers-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .numbers-container button {
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .red { background-color: red; color: white; }
+  .yellow { background-color: yellow; }
+  .green { background-color: green; color: white; }
+  .blue { background-color: blue; color: white; }
+  
