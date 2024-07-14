@@ -183,10 +183,10 @@ function calculatePrice() {
   const includesLottoPlus1 = lottoPlus1Checkbox.checked;
   const includesLottoPlus2 = lottoPlus2Checkbox.checked;
 
-  let baseCost = boards * 5.00; // Base cost for 1 board is R5.00
+  let baseCost = boards * 5.00; 
 
-  if (includesLottoPlus1) baseCost += 2.50; // Add R2.50 if Lotto Plus 1 is selected
-  if (includesLottoPlus2) baseCost += 2.50; // Add R2.50 if Lotto Plus 2 is selected
+  if (includesLottoPlus1) baseCost += 2.50; 
+  if (includesLottoPlus2) baseCost += 2.50; 
 
   ticketData.price = baseCost;
   displayTicketInfo();

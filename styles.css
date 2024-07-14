@@ -92,22 +92,22 @@ h1, h2, h3 {
 }
 
 .number-button.red {
-  background-color: #e74c3c;
+  background-color: red;
   color: white;
 }
 
 .number-button.yellow {
-  background-color: #f39c12;
+  background-color: yellow;
   color: white;
 }
 
 .number-button.green {
-  background-color: #27ae60;
+  background-color: green;
   color: white;
 }
 
 .number-button.blue {
-  background-color: #3498db;
+  background-color: blue;
   color: white;
 }
 
@@ -150,19 +150,6 @@ h1, h2, h3 {
   border-radius: 8px;
 }
 
-/* Responsive Design */
-@media (max-width: 600px) {
-  main {
-    padding: 10px;
-  }
-
-  .number-button {
-    padding: 15px; /* Adjust as necessary */
-    width: 30px; /* Adjust as necessary */
-    height: 30px; /* Adjust as necessary */
-    line-height: 1;
-  }
-}
 #userSection #simulateDrawBtn {
   display: none;
 }
