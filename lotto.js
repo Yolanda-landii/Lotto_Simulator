@@ -9,21 +9,21 @@ const ticketPrices = {
 };
 
 let ticketData = {
-      ticketNumber: 1,
-      boards: [],
-      numbers: [],
-      price: 0,
-      purchaseDate: null,
-      lottoPlus1: false,
-      lottoPlus2: false,
-  };
+  ticketNumber: 1,
+  boards: [],
+  numbers: [],
+  price: 0,
+  purchaseDate: null,
+  lottoPlus1: false,
+  lottoPlus2: false,
+};
 
-  let drawData = {
-      winningNumbers: [],
-      date: null,
-  };
+let drawData = {
+  winningNumbers: [],
+  date: null,
+};
 
-  // HTML elements
+// HTML elements
 const numberSelection = document.getElementById('numberSelection');
 const ticketInfo = document.getElementById('ticketInfo');
 const drawResults = document.getElementById('drawResults');
@@ -37,14 +37,12 @@ const simulateDrawBtn = document.getElementById('simulateDrawBtn');
 const lottoPlus1Checkbox = document.getElementById('lottoPlus1');
 const lottoPlus2Checkbox = document.getElementById('lottoPlus2');
 const boardCountInput = document.getElementById('boardCount');
-const drawCountInput = document.getElementById('drawCount');
 const nextStepBtn = document.getElementById('nextStepBtn');
 const ticketDetailsContainer = document.getElementById('ticketDetailsContainer');
 const boardsContainer = document.getElementById('boardsContainer');
 const adminSimulateDrawBtn = document.getElementById('adminSimulateDrawBtn');
-// const adminDrawResults = document.getElementById('adminDrawResults');
-const backToStartBtn = document.getElementById('backToStartBtn');
-const logoutBtn = document.getElementById('logoutBtn');
+const adminDrawResults = document.getElementById('adminDrawResults');
+const logoutBtns = document.querySelectorAll('.logoutBtn');
 
 // Event Listeners
 loginBtn.addEventListener('click', loginUser);
@@ -52,9 +50,8 @@ generateBoardsBtn.addEventListener('click', generateBoards);
 calculatePriceBtn.addEventListener('click', calculatePrice);
 simulateDrawBtn.addEventListener('click', simulateDraw);
 nextStepBtn.addEventListener('click', handleNextStep);
-// adminSimulateDrawBtn.addEventListener('click', adminSimulateDraw);
-backToStartBtn.addEventListener('click', resetApplicationState);
-// logoutBtn.addEventListener('click', logoutUser);
+adminSimulateDrawBtn.addEventListener('click', adminSimulateDraw);
+logoutBtns.forEach(btn => btn.addEventListener('click', logoutUser));
 
 // Functions to handle tickets and boards
 function createTicket() {
@@ -71,7 +68,7 @@ function addBoardToTicket(ticket, board) {
   } else {
     const newTicket = createTicket();
     newTicket.boards.push(board);
-    ticketData = [newTicket];
+    ticketData = newTicket;
   }
 }
 
@@ -186,10 +183,10 @@ function calculatePrice() {
   const includesLottoPlus1 = lottoPlus1Checkbox.checked;
   const includesLottoPlus2 = lottoPlus2Checkbox.checked;
 
-  let baseCost = boards * ticketPrices.Lotto;
+  let baseCost = boards * 5.00; // Base cost for 1 board is R5.00
 
-  if (includesLottoPlus1) baseCost += boards * ticketPrices.LottoPlus1;
-  if (includesLottoPlus2) baseCost += boards * ticketPrices.LottoPlus2;
+  if (includesLottoPlus1) baseCost += 2.50; // Add R2.50 if Lotto Plus 1 is selected
+  if (includesLottoPlus2) baseCost += 2.50; // Add R2.50 if Lotto Plus 2 is selected
 
   ticketData.price = baseCost;
   displayTicketInfo();
@@ -207,78 +204,86 @@ function displayTicketInfo() {
     <p>Price: R${ticketData.price.toFixed(2)}</p>
     ${boardsInfo}
     <button id="confirmTicketBtn">Confirm Ticket</button>
-    <button id="backToStartBtn">Back to Start</button>
-    <button id="logoutBtn">Logout</button>
+    
   `;
 
   // Add event listeners for new buttons
   document.getElementById('confirmTicketBtn').addEventListener('click', () => {
     saveTicketData(ticketData);
+    alert("Ticket Confirmed.")
     resetApplicationState();
   });
-
-  document.getElementById('backToStartBtn').addEventListener('click', () => {
-    resetApplicationState();
-  });
-  document.getElementById('logoutBtn').addEventListener('click', logoutUser);
-  const newLogoutBtn = document.getElementById('logoutBtn');
-  if (newLogoutBtn) {
-    newLogoutBtn.addEventListener('click', logoutUser);
-  } else {
-    console.error('Logout button not found');
-  }
-}
-
-function handleNextStep() {
-  const boardsCount = ticketData.boards.length;
-
-  if (boardsCount === 0) {
-    alert('No boards have been generated.');
-    return;
-  }
-  // Hide previous elements and show board selection
-  ticketDetailsContainer.classList.remove('hidden');
-  boardsContainer.classList.add('hidden');
-  nextStepBtn.classList.add('hidden');
 }
 
 function simulateDraw() {
-  drawData.winningNumbers = generateRandomNumbers(6, 1, 52);
-  drawData.date = new Date().toLocaleString();
-  displayDrawResults();
-  determineWinners();
-}
+  drawData.winningNumbers = generateRandomNumbers(6);
+  drawData.date = new Date().toLocaleDateString();
 
-function generateRandomNumbers(count, min, max) {
-  const numbers = [];
-  while (numbers.length < count) {
-    const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-    if (!numbers.includes(randomNumber)) numbers.push(randomNumber);
-  }
-  return numbers;
-}
-
-function displayDrawResults() {
   drawResults.innerHTML = `
     <p>Winning Numbers: ${drawData.winningNumbers.join(', ')}</p>
-    <p>Date: ${drawData.date}</p>
+    <p>Draw Date: ${drawData.date}</p>
   `;
-  drawResults.classList.remove('hidden');
+
+  adminDrawResults.classList.remove('hidden');
 }
 
+function generateRandomNumbers(count) {
+  const selectedNumbers = [];
+  while (selectedNumbers.length < count) {
+    const randomNum = Math.floor(Math.random() * 52) + 1;
+    if (!selectedNumbers.includes(randomNum)) {
+      selectedNumbers.push(randomNum);
+    }
+  }
+  return selectedNumbers;
+}
+
+function handleNextStep() {
+  ticketDetailsContainer.classList.remove('hidden');
+}
+
+function loginUser() {
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+
+  if (username === 'admin' && password === 'admin123') {
+    loginSection.classList.add('hidden');
+    adminSection.classList.remove('hidden');
+  } else {
+    loginSection.classList.add('hidden');
+    userSection.classList.remove('hidden');
+  }
+}
+
+function logoutUser() {
+  resetApplicationState();
+  loginSection.classList.remove('hidden');
+  userSection.classList.add('hidden');
+  adminSection.classList.add('hidden');
+}
+
+function adminSimulateDraw() {
+  simulateDraw();
+  adminDrawResults.innerHTML = drawResults.innerHTML;
+  adminDrawResults.classList.remove('hidden');
+}
 function determineWinners() {
   const winningNumbers = drawData.winningNumbers;
   const tickets = getSavedTickets();
 
   tickets.forEach(ticket => {
-    ticket.boards.forEach(board => {
+    ticket.boards.forEach((board, boardIndex) => {
       const matchedNumbers = board.selectedNumbers.filter(num => winningNumbers.includes(num));
       if (matchedNumbers.length > 0) {
-        console.log(`Ticket ${ticket.ticketNumber} - Board ${ticket.boards.indexOf(board) + 1}: ${matchedNumbers.length} match(es).`);
+        console.log(`Ticket ${ticket.ticketNumber} - Board ${boardIndex + 1}: ${matchedNumbers.length} match(es) - ${matchedNumbers.join(', ')}`);
+      } else {
+        console.log(`Ticket ${ticket.ticketNumber} - Board ${boardIndex + 1}: No matches`);
       }
     });
   });
 }
+
+
 
 function notifyWinners(winningTickets) {
   if (winningTickets.length > 0) {
@@ -290,12 +295,6 @@ function notifyWinners(winningTickets) {
     alert('No winning tickets this draw.');
   }
 }
-
-
-function adminSimulateDraw() {
-  simulateDraw(); // Assuming admin draw works the same as user draw
-}
-
 
 function resetApplicationState() {
   // Clear the current ticket data
@@ -329,41 +328,3 @@ function resetApplicationState() {
   userSection.classList.remove('hidden');
   loginSection.classList.add('hidden');
 }
-function logoutUser() {
-  // Hide user and admin sections and show login
-  userSection.style.display = 'none';
-  adminSection.style.display = 'none';
-  loginSection.style.display = 'block';
-
-  // Reset application state
-  resetApplicationState();
-}
-
-function loginUser() {
-  const username = document.getElementById('username').value;
-  const password = document.getElementById('password').value;
-
-  if (username === 'admin' && password === 'password') {
-    loginSection.style.display = 'none';
-    adminSection.style.display = 'block';
-  } else if (username === 'user' && password === 'password') {
-    loginSection.style.display = 'none';
-    userSection.style.display = 'block';
-  } else {
-    alert('Invalid login credentials');
-  }
-}
-
-// Initialize the application
-function init() {
-  loginBtn.addEventListener('click', loginUser);
-  generateBoardsBtn.addEventListener('click', generateBoards);
-  calculatePriceBtn.addEventListener('click', calculatePrice);
-  simulateDrawBtn.addEventListener('click', simulateDraw);
-  nextStepBtn.addEventListener('click', handleNextStep);
-  // adminSimulateDrawBtn.addEventListener('click', adminSimulateDraw);
-  backToStartBtn.addEventListener('click', resetApplicationState);
-  logoutBtn.addEventListener('click', logoutUser); // Ensure event listener is attached
-}
-// Initialize on load
-window.onload = init;

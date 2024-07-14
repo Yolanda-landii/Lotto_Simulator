@@ -1,140 +1,168 @@
-/* General styling for the page */
+/* General Styles */
 body {
   font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
   margin: 0;
   padding: 0;
-  background-color: #f0f0f0;
-  color: #333;
 }
 
-/* Styling for the header */
 header {
-  background-color: #444;
+  background-color: #333;
   color: white;
-  padding: 10px;
   text-align: center;
+  padding: 1rem 0;
 }
 
-/* Main section styling */
 main {
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: #fff;
   padding: 20px;
-}
-
-/* Styling for user and admin sections */
-section {
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
+  border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
 }
 
-/* Styling for number selection buttons */
-#numberSelection button {
-  margin: 5px;
-  padding: 10px;
-  width: 40px;
-  height: 40px;
-  font-size: 16px;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
+h1, h2, h3 {
+  margin-top: 0;
 }
 
-/* Red color for balls 1-13 */
-.red {
-  background-color: red;
-  color: white;
-}
-
-/* Yellow color for balls 14-25 */
-.yellow {
-  background-color: yellow;
-  color: black;
-}
-
-/* Green color for balls 26-37 */
-.green {
-  background-color: green;
-  color: white;
-}
-
-/* Blue color for balls 38-52 */
-.blue {
-  background-color: blue;
-  color: white;
-}
-
-/* Ticket information and draw results sections */
-#ticketInfo, #drawResults {
-  margin-top: 20px;
-  background-color: #f9f9f9;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-/* Button styling */
-button {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-/* Styling for generate and simulate draw buttons */
-#generateBoardsBtn, #simulateDrawBtn {
-  margin-top: 20px;
-}
-
-/* Hover effect for buttons */
-button:hover {
-  background-color: #0056b3;
-}
-
-/* Admin mode styling */
-#adminSection {
+.hidden {
   display: none;
 }
 
-/* Styling for the selected numbers display */
-#selectedNumbers {
-  margin-top: 20px;
-  padding: 10px;
-  background-color: #e9ecef;
-  border: 1px solid #ddd;
+/* Login Section */
+#loginSection, #userSection, #adminSection {
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+#loginSection input[type="text"], #loginSection input[type="password"], #boardCount {
+  padding: 8px;
+  margin: 5px;
+  font-size: 1rem;
+}
+
+#loginBtn, #generateBoardsBtn, #calculatePriceBtn, #simulateDrawBtn, #nextStepBtn, #adminSimulateDrawBtn, .logoutBtn {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 10px;
   border-radius: 5px;
 }
 
-.board {
-  margin-bottom: 20px;
+#loginBtn:hover, #generateBoardsBtn:hover, #calculatePriceBtn:hover, #simulateDrawBtn:hover, #nextStepBtn:hover, #adminSimulateDrawBtn:hover, .logoutBtn:hover {
+  background-color: #555;
+}
+
+/* User Section */
+#ticketDetailsContainer {
+  margin-top: 20px;
+}
+
+#ticketInfo {
+  margin-top: 10px;
   padding: 10px;
   border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+#ticketInfo h4 {
+  margin-top: 0;
+}
+
+.number-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /* Adjust as necessary */
+  margin: 10px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 1rem;
+  width: 40px; /* Ensure uniform circular size */
+  height: 40px; /* Ensure uniform circular size */
+  line-height: 1;
+  text-align: center;
+}
+
+.number-button.red {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.number-button.yellow {
+  background-color: #f39c12;
+  color: white;
+}
+
+.number-button.green {
+  background-color: #27ae60;
+  color: white;
+}
+
+.number-button.blue {
+  background-color: #3498db;
+  color: white;
+}
+
+.number-button.selected {
+  opacity: 0.8;
+}
+
+#boardsContainer {
+  margin-top: 20px;
+}
+
+.board {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.board h3 {
+  margin-top: 0;
 }
 
 .numbers-container {
-  display: flex;
-  flex-wrap: wrap;
+  margin-top: 10px;
 }
 
-.numbers-container button {
-  width: 30px;
-  height: 30px;
-  margin: 5px;
-  border: none;
-  cursor: pointer;
-}
-.ball {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 30px;
-  margin: 5px;
+/* Draw Results Section */
+#drawResults {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
 
+/* Admin Section */
+#adminDrawResults {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
 
+/* Responsive Design */
+@media (max-width: 600px) {
+  main {
+    padding: 10px;
+  }
+
+  .number-button {
+    padding: 15px; /* Adjust as necessary */
+    width: 30px; /* Adjust as necessary */
+    height: 30px; /* Adjust as necessary */
+    line-height: 1;
+  }
+}
+#userSection #simulateDrawBtn {
+  display: none;
+}
